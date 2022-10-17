@@ -1,0 +1,47 @@
+<template>
+  <div class="p-5 card shadow-sm w-50 text-center justify-content-center mt-5">
+    <h2 class="text-primary">{{title}}</h2>
+    <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam architecto aut distinctio earum eos esse et, excepturi incidunt maiores natus nesciunt numquam optio perspiciatis, porro quae reprehenderit similique ullam.</p>
+
+    <div>
+      <p class="fw-bold text-start">List <span class="badge rounded-pill bg-info">{{total()}}</span></p>
+      <input type="text" class="form-control w-50" v-model="newMessage" @keyup.enter="addMessage()">
+      <ul class=" mt-2 w-25" >
+        <li class="" v-for="list in lists" :key="list">{{list}}</li>
+      </ul>
+    </div>
+    <img src="./assets/poe.png" class="w-25 rounded shadow" alt="">
+    <i class="fa fa-heart text-danger fa-3x"></i>
+    <HelloWorld msg="Welcome to Hello World"/>
+  </div>
+
+  
+</template>
+<script>
+import HelloWorld from "@/components/HelloWorld";
+export default {
+  name : "App",
+  data() {
+    return {
+      title: "Vue cli test",
+      newMessage : "",
+      lists : []
+    }
+  },
+  components: {
+    HelloWorld,
+  },
+  methods: {
+    addMessage() {
+      this.lists.push(this.newMessage);
+      this.newMessage = ''
+    },
+    total(){
+      return this.lists.length
+    }
+  },
+}
+</script>
+<style>
+
+</style>

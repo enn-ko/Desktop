@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon " href="./img/logo.png">
+    <title>v-for/v-model/v-on</title>
+    <style>
+        table{
+            margin-top: 30px;
+            width: 500px;
+            border-collapse: collapse;
+        }
+        tr,td,th{
+          border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="vue">
+        <h1>Item List  <span>{{itemTotal}}</span></h1>
+      
+        <input type="text" style="margin-right: 5px;" v-model.trim="itemName" placeholder="Name">
+        <input type="text" v-model.number="itemPrice" @keyup.enter="addNewItems()" placeholder="$">
+        <button @click="addNewItems()">Add</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in items">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                </tr>
+                <tr>
+                    <th colspan="2">total</th>
+                    <th>{{totalPrice}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="./vue.global.js"></script>
+    <script>
+        let {createApp} = Vue;
+        let home = createApp({
+            data(){
+                return{
+                  items : [
+                    {id:1,name:"apple",price:150},
+                    {id:2,name:"orange",price:300},
+                    {id:3,name:"mango",price:250}
+                  ],
+                  itemName : '',
+                  itemPrice : ''
+                  
+                }
+            },
+            computed:{
+                itemTotal(){
+                    return this.items.length;
+                },
+                totalPrice(){
+                    return this.items.reduce((sum,el)=>sum + el.price,0)
+                }
+            },
+            methods:{
+                addNewItems(){
+                   this.items.push(
+                    {id:this.items.length,
+                    name:this.itemName,
+                    price:this.itemPrice}
+                   )
+                   this.itemName = '';
+                   this.itemPrice = ''
+                }
+            }
+
+        }).mount('#vue')
+    </script>
+</body>
+</html>

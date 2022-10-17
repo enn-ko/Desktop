@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if</title>
+</head>
+<body>
+    <div id="text">
+        <!-- //computer prooerty -->
+        <h1>{{name}}</h1>
+        <p>
+          length -- {{lengthOfName}}
+        </p>
+        <p>
+          Start -- {{startChar}}
+        </p>
+        <p>
+          reverse -- {{reverseName}}
+        </p>
+        <p>
+          short -- {{shortName}}
+        </p>
+        <!-- // v-if -->
+        <!-- <h1>{{randomNumber}}</h1>
+        <button v-on:click="run()">Click</button>
+        <h1 v-if="randomNumber>5">Well Done!</h1>
+        <h1 v-else="">Sorry!</h1>
+        <div v-if="type === 'A'">
+            A
+          </div>
+          <div v-else-if="type === 'B'">
+            B
+          </div>
+          <div v-else-if="type === 'C'">
+            C
+          </div>
+          <div v-else>
+            Not A/B/C
+          </div> -->
+          
+    </div>
+    <script src="./vue.global.js"></script>
+    <script>
+        let {createApp} = Vue;
+        let App = Vue
+        let test = createApp({
+            data(){
+               return{
+                //computed property
+                name :"Enn Ko"
+                // v-if
+                // randomNumber : 0 ,
+                // type : "Z"
+               }
+            },
+            computed: {
+            lengthOfName (){
+              return this.name.length
+            },
+            startChar (){
+              return this.name[0]
+            },
+            reverseName (){
+              let result = this.name.split("").reverse().join(" ");
+             
+              return result
+            },
+            shortName(){
+              let result = this.name.split(" ").map(el=>el[0]).join("");
+              return result
+            }
+            },
+            methods: {
+                // v-if
+                // run(){
+                //    this.randomNumber = Math.random().toFixed(1) * 10
+                // }
+            }
+        }).mount('#text')
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperative & Declarative 2</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card mt-3">
+                    <div class="container-fluid py-3">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-between align-items-center p-3">
+                                <h1 id="display"></h1>
+                                <button class="btn btn-outline-danger " id="del">
+                                    Del
+                                </button>
+                            </div>
+                            <div id="voice-container" class="row">
+
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        let voice = ["We","want","our","justice","leader","vote","musts","respect","release","democracy","need","win"];
+        voice.map(el=>{
+            $('#voice-container').append(`
+            <div class="col-4">
+                <div class="border rounded text-center py-5 mt-3 voice-message">
+                <h1>${el}</h1>
+                </div>
+            </div>
+            `)
+        });
+        //display
+        $('.voice-message').on("click",function(){
+            //input
+            let currentText = $(this).text();
+            //output
+            $('#display').append(currentText);
+            $(this).addClass('bg-secondary');
+        });
+
+        //del
+        $('#del').on("click",function(){
+            $('#display').empty();
+            $('.voice-message').removeClass('bg-secondary')
+        })
+    </script>
+</body>
+</html>

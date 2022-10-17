@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperative & Declarative 2</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card mt-3">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12" :class="['d-flex justify-content-between align-item-center py-3 mt-3']">
+                                <h1>{{display}}</h1>
+                                <button :class="['btn btn-outline-danger']" @click="del()">
+                                    Del
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-4" v-for="v in voice">
+                                    <div :class="['border rounded text-center mt-3 py-5',{'bg-secondary':v.isPress}]" @click="run(v.name),v.isPress=true">
+                                        <h1>{{v.name}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../1_vue_b/vue.global.js"></script>
+<script>
+    let {createApp} = Vue
+    let app = createApp({
+        data(){
+            return{
+                display: '',
+                voice : [
+                    {name:"We",isPress:false},
+                    {name:"want",isPress:false},
+                    {name:"our",isPress:false},
+                    {name:"leader",isPress:false},
+                    {name:"vote",isPress:false},
+                    {name:"justice",isPress:false},
+                    {name:"must",isPress:false},
+                    {name:"respect",isPress:false},
+                    {name:"release",isPress:false},
+                    {name:"democracy",isPress:false},
+                    {name:"need",isPress:false},
+                    {name:"win",isPress:false}
+                ]
+            }
+        },
+        methods:{
+            run(x){
+                this.display += x + " "
+                console.log(x)
+            },
+            del(){
+                this.display = "";
+                let newArr = [];
+                this.voice.map(el=>{
+                    newArr.push({name:el.name,isPress:false})
+                })
+                this.voice = newArr
+
+            }
+        }
+    }).mount('#app')
+
+</script>
+</html>
